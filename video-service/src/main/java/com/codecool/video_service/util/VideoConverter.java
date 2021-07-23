@@ -1,6 +1,7 @@
 package com.codecool.video_service.util;
 
 import com.codecool.video_service.configuration.YoutubeApiConfiguration;
+import com.codecool.video_service.model.Recommendation;
 import com.codecool.video_service.model.Video;
 import lombok.Data;
 import org.json.JSONArray;

@@ -2,6 +2,8 @@ package com.codecool.video_service.controller;
 
 import com.codecool.video_service.model.Video;
 import com.codecool.video_service.service.VideoService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

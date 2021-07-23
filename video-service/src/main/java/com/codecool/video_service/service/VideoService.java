@@ -5,8 +5,10 @@ import com.codecool.video_service.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class VideoService {
@@ -19,7 +21,7 @@ public class VideoService {
     }
 
     public Set<Video> getVideos() {
-        return (Set<Video>) videoRepository.findAll();
+        return new HashSet<>(videoRepository.findAll());
     }
 
     public Optional<Video> getVideoById(int id) {
