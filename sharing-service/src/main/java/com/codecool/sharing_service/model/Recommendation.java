@@ -20,6 +20,7 @@ public class Recommendation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String videoId;
     private String message;
     private String postedAt;
 }
