@@ -24,7 +24,7 @@ public class VideoService {
         return new HashSet<>(videoRepository.findAll());
     }
 
-    public Optional<Video> getVideoById(int id) {
+    public Optional<Video> getVideoById(String id) {
         return videoRepository.findById(id);
     }
 }

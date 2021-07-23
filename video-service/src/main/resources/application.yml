@@ -1,12 +1,12 @@
 application:
   youtube:
-    apiKey: AIzaSyCWRuGgZOiBhIfRViI9hB3SIXKqQTBnooo
+    apiKey: AIzaSyBuSLsmd7CbdVdmYeBf-qG387XQ_H6c8yE
 
 spring:
   jpa:
     database: postgresql
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   datasource:
     url: jdbc:postgresql://localhost/video_service
     username:
