@@ -1,3 +1,37 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,macos,windows,linux,intellij,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,macos,windows,linux,intellij,visualstudiocode
 
@@ -231,17 +265,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-
-# Video Service module
-video-service/*.iml
-
-# Recommendation Service module
-sharing-service/*.iml
-
-# Service Registry module
-sharing-service/*.iml
-sharing-service/*.mvn
-service-registry/mvnw
-service-registry/mvnw.cmd
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,macos,windows,linux,intellij,visualstudiocode

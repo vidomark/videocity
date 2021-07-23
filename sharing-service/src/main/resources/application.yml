@@ -1,4 +1,9 @@
+server:
+  port: 8081
+
 spring:
+  application:
+    name: RECOMMENDATION-SERVICE
   jpa:
     database: postgresql
     hibernate:
@@ -8,5 +13,9 @@ spring:
     username:
     password:
     driver-class-name: org.postgresql.Driver
-server:
-  port: 8081
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

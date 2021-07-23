@@ -3,6 +3,8 @@ application:
     apiKey: AIzaSyBuSLsmd7CbdVdmYeBf-qG387XQ_H6c8yE
 
 spring:
+  application:
+    name: VIDEO-SERVICE
   jpa:
     database: postgresql
     hibernate:
@@ -12,3 +14,10 @@ spring:
     username:
     password:
     driver-class-name: org.postgresql.Driver
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
