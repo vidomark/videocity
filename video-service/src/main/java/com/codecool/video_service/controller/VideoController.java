@@ -1,5 +1,6 @@
 package com.codecool.video_service.controller;
 
+import com.codecool.video_service.model.Response;
 import com.codecool.video_service.model.Video;
 import com.codecool.video_service.service.VideoService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,11 +33,11 @@ public class VideoController {
     }
 
     @GetMapping(params = "id")
-    public ResponseEntity<Object> getVideoById(@RequestParam("id") String id) {
-        Optional<Video> video = videoService.getVideoById(id);
-        if (video.isEmpty()) {
+    public ResponseEntity<Object> getVideoById(@RequestParam("id") String id) { // With recommendations
+        Response response = videoService.getVideoById(id);
+        if (response == null) {
             return new ResponseEntity<>(String.format("Video is not found with id %s!", id), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(video.get(), HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
