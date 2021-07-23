@@ -35,7 +35,7 @@ public class VideoService {
             return null;
         }
 
-        String recommendationUrl = "http://localhost:8081/recommendation?videoId=" + id;
+        String recommendationUrl = "http://RECOMMENDATION-SERVICE/recommendation?videoId=" + id;
         Recommendation[] recommendation = restTemplate.getForObject(recommendationUrl, Recommendation[].class);
         if (recommendation == null) {
             return null;
