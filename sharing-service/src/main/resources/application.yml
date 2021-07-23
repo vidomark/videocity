@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:postgresql://localhost/video_sharing_service
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+server:
+  port: 8081

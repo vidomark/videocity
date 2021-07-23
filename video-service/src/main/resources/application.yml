@@ -1,0 +1,14 @@
+application:
+  youtube:
+    apiKey: AIzaSyCWRuGgZOiBhIfRViI9hB3SIXKqQTBnooo
+
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:postgresql://localhost/video_service
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
