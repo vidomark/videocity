@@ -1,10 +1,13 @@
 package com.codecool.video_service.controller;
 
+import com.codecool.video_service.model.Response;
 import com.codecool.video_service.model.Video;
 import com.codecool.video_service.service.VideoService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +33,11 @@ public class VideoController {
     }
 
     @GetMapping(params = "id")
-    public Video getVideoById(@RequestParam("id") int id) {
-        return videoService.getVideoById(id)
-                .orElseThrow(() -> new IllegalStateException(String.format("Video not found with id %s", id)));
+    public ResponseEntity<Object> getVideoById(@RequestParam("id") String id) { // With recommendations
+        Response response = videoService.getVideoById(id);
+        if (response == null) {
+            return new ResponseEntity<>(String.format("Video is not found with id %s!", id), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

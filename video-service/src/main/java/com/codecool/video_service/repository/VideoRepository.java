@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 @Repository
-public interface VideoRepository extends JpaRepository<Video, Integer> {
+public interface VideoRepository extends JpaRepository<Video, String> {
 }

@@ -19,9 +19,9 @@ public class Video {
 	@Id
 	private String id;
 
-	@ElementCollection
+	/*@ElementCollection
 	@Singular
-	private Set<Recommendation> recommendations = new HashSet<>();
+	private Set<Recommendation> recommendations = new HashSet<>();*/
 
 	@SerializedName("publishTime")
 	private String publishTime;

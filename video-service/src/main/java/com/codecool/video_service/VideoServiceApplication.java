@@ -35,17 +35,19 @@ public class VideoServiceApplication {
     @Bean
     CommandLineRunner commandLineRunner() {
         return args -> {
-            int numberOfVideos = Math.toIntExact(videoRepository.count());
-            //if (numberOfVideos < 1) { // If database is empty
-            RestTemplate restTemplate = new RestTemplate();
-            String youtubeApiKey = youtubeApiConfiguration.getApiKey();
-            String youtubeApiChannel = String.format("https://www.googleapis.com/youtube/v3/search?key=%s&playlistId=PLxeobsc2iscCHBzruJVasVmz7z1EEk7Tf&part=snippet&type=video", youtubeApiKey);
-            ResponseEntity<String> response = restTemplate.getForEntity(youtubeApiChannel, String.class);
-            videoConverter.createVideos(response);
+            int numberOfVideos = (int) videoRepository.count();
 
-            Set<Video> videos = videoConverter.getVideos();
-            videoRepository.saveAll(videos);
-            //}
+            // If database is empty
+            if (numberOfVideos < 1) {
+                RestTemplate restTemplate = new RestTemplate();
+                String youtubeApiKey = youtubeApiConfiguration.getApiKey();
+                String youtubeApiChannel = String.format("https://www.googleapis.com/youtube/v3/search?key=%s&playlistId=PLxeobsc2iscCHBzruJVasVmz7z1EEk7Tf&part=snippet&type=video", youtubeApiKey);
+                ResponseEntity<String> response = restTemplate.getForEntity(youtubeApiChannel, String.class);
+                videoConverter.createVideos(response);
+
+                Set<Video> videos = videoConverter.getVideos();
+                videoRepository.saveAll(videos);
+            }
         };
     }
 
