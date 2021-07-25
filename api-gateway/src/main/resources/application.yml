@@ -1,0 +1,25 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+zuul:
+  ignored-services: '*'
+  routes:
+    VIDEO-SERVICE:
+      serviceId: VIDEO-SERVICE
+      path: /video/**
+      url: "http://localhost:8080/video/"
+    RECOMMENDATION-SERVICE:
+      serviceId: RECOMMENDATION-SERVICE
+      path: /recommendation/**
+      url: "http://localhost:8081/recommendation/"

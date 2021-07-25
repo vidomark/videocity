@@ -4,6 +4,7 @@ import com.codecool.video_service.model.Recommendation;
 import com.codecool.video_service.model.Response;
 import com.codecool.video_service.model.Video;
 import com.codecool.video_service.repository.VideoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class VideoService {
 
     private final VideoRepository videoRepository;
@@ -26,21 +28,25 @@ public class VideoService {
     }
 
     public Set<Video> getVideos() {
+        log.info("Fetching every video without its recommendation(s)");
         return new HashSet<>(videoRepository.findAll());
     }
 
     public Response getVideoById(String id) { // With recommendations
         Optional<Video> video = videoRepository.findById(id);
         if (video.isEmpty()) {
+            // throw new IllegalStateException(String.format("Video is not found with ID %s", id));
+            log.error(String.format("Video is not found with ID %s", id));
             return null;
         }
 
         String recommendationUrl = "http://RECOMMENDATION-SERVICE/recommendation?videoId=" + id;
         Recommendation[] recommendation = restTemplate.getForObject(recommendationUrl, Recommendation[].class);
         if (recommendation == null) {
-            return null;
+            throw new IllegalStateException(String.format("Recommendation(s) is not found with video ID %s", id));
         }
 
+        log.info("Video found with recommendation(s)!");
         return new Response(video.get(), recommendation);
     }
 }
