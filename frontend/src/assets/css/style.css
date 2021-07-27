@@ -11213,3 +11213,18 @@ html {
   background-repeat: no-repeat;
   min-height: 15rem;
 }
+
+.video {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video iframe {
+  left: 80px;
+  top: 40px;
+  height: 80%;
+  width: 80%;
+  position: absolute;
+}

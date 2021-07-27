@@ -7,7 +7,7 @@ export default function Video({ video, selectVideo }) {
   return (
     <div class="col-lg-4 mb-5">
       <Link
-        to={`/video?id=${video.id}`}
+        to={`/video/${video.id}`}
         style={{ color: "inherit", textDecoration: "inherit" }}
       >
         <div

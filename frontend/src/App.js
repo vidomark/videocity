@@ -16,7 +16,18 @@ function App() {
 
   const selectVideo = (video) => {
     setVideo(video);
+    localStorage.setItem("video", JSON.stringify(video));
   };
+
+  const watchVideo = () => {
+    try {
+      return JSON.parse(localStorage.getItem("video"));
+    } catch (exception) {
+      return null;
+    }
+  };
+
+  const localStorageVideo = watchVideo();
 
   return (
     <div className="App">
@@ -37,11 +48,13 @@ function App() {
         />
 
         {/* For watching youtube video */}
-        {video && (
+        {localStorageVideo && (
           <Route
             exact
-            path={`/video?id=${video.id}`}
-            render={() => <VideoPage {...{ video }} />}
+            path={`/video/${localStorageVideo.id}`}
+            render={() => (
+              <VideoPage {...{ video }} {...{ localStorageVideo }} />
+            )}
           />
         )}
 
