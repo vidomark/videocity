@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { fetchData } from "../util/api";
 import Video from "./Video";
 
-export default function Videos() {
+export default function Videos({ selectVideo }) {
   const [videos, setVideos] = useState(null);
+
   useEffect(() => {
     const videoUrl = "http://localhost:9090/video";
     fetchData(videoUrl).then((result) => setVideos(result.data));
@@ -27,7 +28,7 @@ export default function Videos() {
           </div>
           <div class="row gx-5">
             {videos.map((video) => (
-              <Video video={video} />
+              <Video key={video.id} {...{ video }} {...{ selectVideo }} />
             ))}
           </div>
         </div>
