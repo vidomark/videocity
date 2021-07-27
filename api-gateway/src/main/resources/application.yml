@@ -3,7 +3,18 @@ server:
 
 spring:
   application:
-    name: api-gateway
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: VIDEO-SERVICE
+          uri: lb://VIDEO-SERVICE
+          predicates:
+            - Path=/video/**
+        - id: RECOMMENDATION-SERVICE
+          uri: lb://RECOMMENDATION-SERVICE
+          predicates:
+            - Path=/recommendation/**
 
 eureka:
   client:
@@ -11,15 +22,3 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-zuul:
-  ignored-services: '*'
-  routes:
-    VIDEO-SERVICE:
-      serviceId: VIDEO-SERVICE
-      path: /video/**
-      url: "http://localhost:8080/video/"
-    RECOMMENDATION-SERVICE:
-      serviceId: RECOMMENDATION-SERVICE
-      path: /recommendation/**
-      url: "http://localhost:8081/recommendation/"
