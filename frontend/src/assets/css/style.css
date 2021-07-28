@@ -11216,15 +11216,101 @@ html {
 
 .video {
   overflow: hidden;
-  padding-bottom: 56.25%;
+  padding-bottom: 55%;
   position: relative;
   height: 0;
 }
 
-.video iframe {
+.iframe {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.iframe-page {
   left: 80px;
   top: 40px;
-  height: 80%;
-  width: 80%;
+  right: 80px;
+  height: 93.5%;
+  width: 90%;
   position: absolute;
+}
+
+.video-title {
+  margin-left: 80px;
+  font-size: 30px;
+  text-align: left;
+}
+
+.video-publishedAt {
+  margin-left: 80px;
+  text-align: left;
+}
+
+.video-description {
+  margin-top: 30px;
+  margin-left: 80px;
+}
+
+.video-profile-picture {
+  max-width: 50px;
+  margin-left: 80px;
+  margin-top: 15px;
+  border-radius: 50%;
+}
+
+.video-channel-title {
+  margin-left: 20px;
+}
+
+.recommendation-container {
+  margin-bottom: 100px;
+}
+
+.recommendation-profile-picture {
+  max-width: 30px;
+  margin-left: 80px;
+  border-radius: 50%;
+}
+
+.recommendation-message {
+  margin-left: 30px;
+  max-width: 500px;
+  text-align: left;
+}
+
+.recommendation-postedAt {
+  text-align: left;
+  margin-top: 5px;
+  margin-left: 30px;
+  font-size: 12px;
+}
+
+.comments {
+  margin-top: 40px;
+  margin-left: 80px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.comment-container {
+  margin-left: 28px;
+}
+
+.comment-button {
+  max-width: 100px;
+}
+
+.error {
+  margin: 50px;
+}
+
+.divider {
+  border-top: 3px solid #bbb;
+  border-radius: 8px;
+  width: 90%;
+  margin-left: 80px;
+  margin-top: 10px;
 }
