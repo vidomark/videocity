@@ -13,3 +13,10 @@ export const postData = (url, data, headers = null) => {
     .then((result) => result)
     .catch((error) => console.log(error));
 };
+
+export const deleteData = (url, headers = null) => {
+  return axios
+    .delete(url, { headers: headers })
+    .then((result) => result)
+    .catch((error) => console.log(error));
+};

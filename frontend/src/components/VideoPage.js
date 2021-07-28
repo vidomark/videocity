@@ -104,7 +104,10 @@ export default function VideoPage({ video, localStorageVideo }) {
             </Form.Group>
           </div>
           {recommendations.map((recommendation) => (
-            <Recommendation {...{ recommendation }} />
+            <Recommendation
+              {...{ recommendation }}
+              {...{ setRecommendations }}
+            />
           ))}
         </div>
       )

@@ -37,4 +37,9 @@ public class RecommendationController {
         }
         return new ResponseEntity<>(savedRecommendation, HttpStatus.OK);
     }
+
+    @DeleteMapping(params = "id")
+    public void deleteRecommendation(@RequestParam("id") String id) {
+        recommendationService.deleteRecommendation(id);
+    }
 }

@@ -44,4 +44,9 @@ public class RecommendationService {
         log.info(String.format("Recommendation saved for video %s", videoId));
         return recommendationRepository.save(recommendation);
     }
+
+    @Transactional
+    public void deleteRecommendation(String id) {
+        recommendationRepository.deleteById(Integer.valueOf(id));
+    }
 }
