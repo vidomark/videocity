@@ -1,6 +1,6 @@
 import "./App.css";
 import "./assets/css/style.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/css/form.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
@@ -11,6 +11,8 @@ import VideoPage from "./components/VideoPage";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import { Fragment } from "react";
+import Login from "./components/Login";
+import Registration from "./components/Registration";
 
 function App() {
   const [video, setVideo] = useState(null); // Selected video
@@ -34,6 +36,10 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
+
+        <Route exact path="/login" component={Login} />
+
+        <Route exact path="/registration" component={Registration} />
 
         <Route
           exact

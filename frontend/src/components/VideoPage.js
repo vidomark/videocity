@@ -46,6 +46,7 @@ export default function VideoPage({ video, localStorageVideo }) {
 
   useEffect(() => {
     fetchRecommendations();
+    /* eslint-disable */
   }, []);
 
   if (error) {

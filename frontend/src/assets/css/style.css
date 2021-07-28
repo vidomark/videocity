@@ -11336,3 +11336,14 @@ html {
   margin-left: 80px;
   margin-top: 10px;
 }
+
+.footer {
+  margin-top: -200px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.clear-height {
+  height: 200px;
+}

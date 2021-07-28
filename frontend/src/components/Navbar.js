@@ -32,70 +32,15 @@ export default function Navbar() {
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/">
+              <Link class="nav-link" to="/login">
                 Login
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/">
+              <Link class="nav-link" to="/registration">
                 Registration
               </Link>
             </li>
-
-            {/* <li class="nav-item dropdown">
-              <Link
-                class="nav-link dropdown-toggle"
-                id="navbarDropdownBlog"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Blog
-              </Link>
-              <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownBlog"
-              >
-                <li>
-                  <Link class="dropdown-item" href="blog-home.html">
-                    Blog Home
-                  </Link>
-                </li>
-                <li>
-                  <Link class="dropdown-item" href="blog-post.html">
-                    Blog Post
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <Link
-                class="nav-link dropdown-toggle"
-                id="navbarDropdownPortfolio"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Portfolio
-              </Link>
-              <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownPortfolio"
-              >
-                <li>
-                  <Link class="dropdown-item" href="portfolio-overview.html">
-                    Portfolio Overview
-                  </Link>
-                </li>
-                <li>
-                  <Link class="dropdown-item" href="portfolio-item.html">
-                    Portfolio Item
-                  </Link>
-                </li>
-              </ul>
-            </li> */}
           </ul>
         </div>
       </div>
