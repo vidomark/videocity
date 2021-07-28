@@ -1,11 +1,15 @@
-import React from "react";
-import profilePicture from "../assets/images/profile-picture.png";
+import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
 import { ReactComponent as Bin } from "../assets/images/trash.svg";
-import axios from "axios";
-import { deleteData } from "../util/api";
+import { ReactComponent as Edit } from "../assets/images/edit.svg";
+import { deleteData, putData } from "../util/api";
+import { Alert, Col, Form, Row, Button } from "react-bootstrap";
+import profilePicture from "../assets/images/profile-picture.png";
 
 export default function Recommendation({ recommendation, setRecommendations }) {
+  const [edit, setEdit] = useState(false);
+  const [message, setMessage] = useState(null);
+
   const deleteComment = () => {
     const url = `http://localhost:9090/recommendation?id=${recommendation.id}`;
     const message = recommendation.message;
@@ -16,6 +20,24 @@ export default function Recommendation({ recommendation, setRecommendations }) {
             (recommendation) => recommendation.message !== message
           )
         );
+      }
+    });
+  };
+
+  const editComment = () => {
+    const url = `http://localhost:9090/recommendation?id=${recommendation.id}`;
+    putData(url, message).then((result) => {
+      if (result.status === 200) {
+        const newComment = result.data;
+        setRecommendations((previous) =>
+          previous.map((recommendation) => {
+            if (recommendation.id === newComment.id) {
+              return (recommendation = newComment);
+            }
+            return recommendation;
+          })
+        );
+        setEdit(false);
       }
     });
   };
@@ -32,12 +54,29 @@ export default function Recommendation({ recommendation, setRecommendations }) {
         </Grid>
         <Grid item>
           <div className="recommendation-message">
-            <div>{recommendation.message}</div>
-            <div
-              className="delete-icon-container"
-              onClick={() => deleteComment()}
-            >
-              <Bin className="delete-icon" />
+            <div>
+              {edit ? (
+                <Form.Group as={Row}>
+                  <Col sm="10">
+                    <Form.Control
+                      type="text"
+                      placeholder="Edit your comment..."
+                      onChange={(event) => setMessage(event.target.value)}
+                    />
+                  </Col>
+                  <Form.Label column>
+                    <Button column onClick={() => editComment()}>
+                      Edit
+                    </Button>
+                  </Form.Label>
+                </Form.Group>
+              ) : (
+                recommendation.message
+              )}
+            </div>
+            <div className="delete-icon-container">
+              <Bin className="delete-icon" onClick={() => deleteComment()} />
+              <Edit className="edit-icon" onClick={() => setEdit(true)} />
             </div>
           </div>
 

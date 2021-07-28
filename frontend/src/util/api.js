@@ -20,3 +20,10 @@ export const deleteData = (url, headers = null) => {
     .then((result) => result)
     .catch((error) => console.log(error));
 };
+
+export const putData = (url, data, headers = null) => {
+  return axios
+    .put(url, data, { headers: headers })
+    .then((result) => result)
+    .catch((error) => console.log(error));
+};

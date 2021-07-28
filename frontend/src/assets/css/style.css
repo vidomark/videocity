@@ -11317,6 +11317,14 @@ html {
   cursor: pointer;
 }
 
+.edit-icon {
+  margin-left: 25px;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+}
+
 .error {
   margin: 50px;
 }

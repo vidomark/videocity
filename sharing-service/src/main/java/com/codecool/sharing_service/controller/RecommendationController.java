@@ -21,25 +21,22 @@ public class RecommendationController {
     }
 
     @GetMapping(params = "videoId")
-    public ResponseEntity<Object> getRecommendationByVideoId(@RequestParam("videoId") String videoId) {
-        Set<Recommendation> recommendations = recommendationService.getRecommendationByVideoId(videoId);
-        if (recommendations == null || recommendations.size() == 0) {
-            return new ResponseEntity<>(String.format("There are no recommendations with video id %s!", videoId), HttpStatus.NOT_ACCEPTABLE);
-        }
-        return new ResponseEntity<>(recommendations, HttpStatus.OK);
+    public Set<Recommendation> getRecommendationsByVideoId(@RequestParam("videoId") String videoId) {
+        return recommendationService.getRecommendationsByVideoId(videoId);
     }
 
     @PostMapping(params = "videoId")
-    public ResponseEntity<Object> saveRecommendationForVideo(@RequestParam("videoId") String videoId, @RequestBody Recommendation recommendation) {
-        Recommendation savedRecommendation = recommendationService.saveRecommendationForVideo(videoId, recommendation);
-        if (savedRecommendation == null) {
-            return new ResponseEntity<>("Invalid request, please check your recommendation!", HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(savedRecommendation, HttpStatus.OK);
+    public Recommendation saveRecommendationForVideo(@RequestParam("videoId") String videoId, @RequestBody Recommendation recommendation) {
+        return recommendationService.saveRecommendationForVideo(videoId, recommendation);
     }
 
     @DeleteMapping(params = "id")
     public void deleteRecommendation(@RequestParam("id") String id) {
         recommendationService.deleteRecommendation(id);
+    }
+
+    @PutMapping(params = "id")
+    public Recommendation editRecommendation(@RequestParam("id") String id, @RequestBody String message) {
+        return recommendationService.editRecommendation(id, message);
     }
 }
