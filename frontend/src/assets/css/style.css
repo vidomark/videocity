@@ -11269,6 +11269,10 @@ html {
   margin-bottom: 100px;
 }
 
+.recommendation {
+  margin-bottom: 40px;
+}
+
 .recommendation-profile-picture {
   max-width: 30px;
   margin-left: 80px;

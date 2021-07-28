@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 
 export default function Recommendation({ recommendation }) {
   return (
-    <div>
+    <div className="recommendation">
       <Grid container direction="row">
         <Grid item>
           <img

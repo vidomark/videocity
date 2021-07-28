@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { fetchData } from "../util/api";
+import { fetchData, postData } from "../util/api";
 import { Alert, Col, Form, Row, Button } from "react-bootstrap";
 import profilePicture from "../assets/images/profile-picture.png";
 import Iframe from "./Iframe";
@@ -30,7 +30,18 @@ export default function VideoPage({ video, localStorageVideo }) {
   };
 
   const commentVideo = () => {
-    console.log(comment);
+    const url = `http://localhost:9090/recommendation?videoId=${video.id}`;
+    const recommendation = {
+      videoId: video.id,
+      message: comment,
+      postedAt: "",
+    };
+    postData(url, recommendation).then((result) => {
+      if (result.status === 200) {
+        const newRecommendation = result.data;
+        setRecommendations([...recommendations, newRecommendation]);
+      }
+    });
   };
 
   useEffect(() => {
