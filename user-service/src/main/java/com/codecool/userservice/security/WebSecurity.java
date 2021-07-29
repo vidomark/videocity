@@ -1,5 +1,6 @@
 package com.codecool.userservice.security;
 
+import com.codecool.userservice.security.filter.LoginAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +15,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationProvider authenticationProvider;
+    private final LoginAuthenticationFilter loginAuthenticationFilter;
 
     @Autowired
-    public WebSecurity(AuthenticationProvider authenticationProvider) {
+    public WebSecurity(AuthenticationProvider authenticationProvider, LoginAuthenticationFilter loginAuthenticationFilter) {
         this.authenticationProvider = authenticationProvider;
+        this.loginAuthenticationFilter = loginAuthenticationFilter;
     }
 
     @Override
@@ -28,6 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .cors()
                 .and()
+                .addFilter(loginAuthenticationFilter)
                 .authorizeRequests()
                 .anyRequest().permitAll()
                 .and()

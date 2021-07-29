@@ -1,0 +1,53 @@
+version: '3'
+services:
+  registry:
+    build:
+      context: ./service-registry
+    container_name: registry
+    expose:
+      - "8761"
+  video-service:
+    build:
+      context: ./video-service
+    container_name: video-servie
+    environment:
+      - DB_DOMAIN=video_db
+    expose:
+      - "8762"
+    depends_on:
+      - "registry"
+      - "video_db"
+  sharing-service:
+    build:
+      context: ./sharing-service
+    container_name: sharing-service
+    environment:
+      - DB_DOMAIN=recommendation_db
+    expose:
+      - "8763"
+    depends_on:
+      - "registry"
+      - "recommendation_db"
+  gateway:
+    build:
+      context: ./api-gateway
+    container_name: gateway
+    ports:
+    - "127.0.0.1:8080:8760"
+    depends_on:
+      - registry
+      - video-service
+      - sharing-service
+  video_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: videocity_video_service
+  recommendation_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: videocity_recommendation_service
+
