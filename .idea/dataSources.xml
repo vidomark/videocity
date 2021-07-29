@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="video_service@localhost" uuid="947ec34c-30a9-43c3-92e6-004529cd11dd">
+    <data-source source="LOCAL" name="videocity_video_service@localhost" uuid="be1cabab-9e64-4ab0-a1d7-4637047a5fca">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost/video_service</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="video_sharing_service@localhost" uuid="e5502399-f964-40f2-8fe0-b7ae1274fd94">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost/video_sharing_service</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/videocity_video_service</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

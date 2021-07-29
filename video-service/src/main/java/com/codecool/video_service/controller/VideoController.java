@@ -37,15 +37,10 @@ public class VideoController {
     @GetMapping(params = "id")
     @CircuitBreaker(name = "getVideoWithRecommendation", fallbackMethod = "getVideoWithRecommendationFallback")
     public ResponseEntity<Object> getVideoWithRecommendation(@RequestParam("id") String id) { // Search for video based on ID
-        Response response = videoService.getVideoById(id);
-        if (response == null) {
-            return new ResponseEntity<>(String.format("Video is not found with id %s!", id), HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(videoService.getVideoById(id), HttpStatus.OK);
     }
 
     private ResponseEntity<Object> getVideoWithRecommendationFallback(Throwable throwable) {
-        log.error("Recommendation service is down!");
-        return new ResponseEntity<>("Recommendation service is down!", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("No recommendations found!", HttpStatus.ACCEPTED);
     }
 }

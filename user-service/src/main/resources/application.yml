@@ -4,6 +4,13 @@ server:
 spring:
   application:
     name: USER-SERVICE
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:postgresql://localhost/videocity_user_service
+
 
 eureka:
   client:

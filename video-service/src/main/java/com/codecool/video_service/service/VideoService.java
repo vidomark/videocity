@@ -1,5 +1,7 @@
 package com.codecool.video_service.service;
 
+import com.codecool.video_service.exception.RecommendationNotFoundException;
+import com.codecool.video_service.exception.VideoNotFoundException;
 import com.codecool.video_service.model.Recommendation;
 import com.codecool.video_service.model.Response;
 import com.codecool.video_service.model.Video;
@@ -35,18 +37,15 @@ public class VideoService {
     public Response getVideoById(String id) { // With recommendations
         Optional<Video> video = videoRepository.findById(id);
         if (video.isEmpty()) {
-            // throw new IllegalStateException(String.format("Video is not found with ID %s", id));
-            log.error(String.format("Video is not found with ID %s", id));
-            return null;
+            throw new VideoNotFoundException(String.format("Video is not found with ID %s", id));
         }
 
         String recommendationUrl = "http://RECOMMENDATION-SERVICE/recommendation?videoId=" + id;
-        Recommendation[] recommendation = restTemplate.getForObject(recommendationUrl, Recommendation[].class);
-        if (recommendation == null) {
-            throw new IllegalStateException(String.format("Recommendation(s) is not found with video ID %s", id));
+        try {
+            Recommendation[] recommendation = restTemplate.getForObject(recommendationUrl, Recommendation[].class);
+        } catch (Exception ignored) {
+            return new Response(video.get(), null);
         }
-
-        log.info("Video found with recommendation(s)!");
-        return new Response(video.get(), recommendation);
+        return null;
     }
 }

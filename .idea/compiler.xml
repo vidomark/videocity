@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="authentication-service" />
+        <module name="user-service" />
         <module name="sharing-service" />
         <module name="video-service" />
         <module name="service-registry" />
@@ -19,6 +20,7 @@
       <module name="authentication-service" target="16" />
       <module name="service-registry" target="16" />
       <module name="sharing-service" target="16" />
+      <module name="user-service" target="16" />
       <module name="video-service" target="16" />
     </bytecodeTargetLevel>
   </component>
@@ -28,6 +30,7 @@
       <module name="authentication-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
       <module name="sharing-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
       <module name="video-service" options="-parameters" />
     </option>
   </component>

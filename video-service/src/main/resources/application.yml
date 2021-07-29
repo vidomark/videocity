@@ -3,16 +3,21 @@ application:
     apiKey: AIzaSyBuSLsmd7CbdVdmYeBf-qG387XQ_H6c8yE
 
 spring:
+  profiles:
+    active: development
   application:
     name: VIDEO-SERVICE
   jpa:
     database: postgresql
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
   datasource:
-    url: jdbc:postgresql://localhost/video_service
-    username:
-    password:
+    url: jdbc:postgresql://localhost/videocity_video_service
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
 eureka:
