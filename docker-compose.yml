@@ -11,7 +11,10 @@ services:
       context: ./video-service
     container_name: video-servie
     environment:
-      - DB_DOMAIN=video_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost/videocity_video_service
+      - SPRING_DATASOURCE_USERNAME=
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     expose:
       - "8762"
     depends_on:
@@ -22,7 +25,10 @@ services:
       context: ./sharing-service
     container_name: sharing-service
     environment:
-      - DB_DOMAIN=recommendation_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost/videocity_recommendation_service
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     expose:
       - "8763"
     depends_on:
@@ -40,13 +46,13 @@ services:
       - sharing-service
   video_db:
     image: postgres
-    restart: always
+    container_name: video_db
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: videocity_video_service
   recommendation_db:
     image: postgres
-    restart: always
+    container_name: recommendation_db
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: videocity_recommendation_service

@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: API-GATEWAY
+    jwt:
+      secretKey: D5UmXKGUpmTmNTYsdkgKW1GVrHoHEHNC
+      tokenPrefix: Bearer
+      expirationDate: 14
   cloud:
     gateway:
       globalcors:
@@ -20,14 +24,6 @@ spring:
           uri: lb://AUTHENTICATION-SERVICE
           predicates:
             - Path=/auth/**
-        - id: VIDEO-SERVICE
-          uri: lb://VIDEO-SERVICE
-          predicates:
-            - Path=/video/**
-        - id: RECOMMENDATION-SERVICE
-          uri: lb://RECOMMENDATION-SERVICE
-          predicates:
-            - Path=/recommendation/**
 
 eureka:
   client:

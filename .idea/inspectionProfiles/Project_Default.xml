@@ -37,6 +37,7 @@
       <option name="customHeaders">
         <set>
           <option value="username" />
+          <option value="Authorization " />
         </set>
       </option>
     </inspection_tool>

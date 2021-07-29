@@ -7,9 +7,12 @@ import profilePicture from "../assets/images/profile-picture.png";
 import Iframe from "./Iframe";
 import VideoDescription from "./VideoDescription";
 import Recommendation from "./Recommendation";
+import token from "../util/token";
+import { Fragment } from "react";
 
 export default function VideoPage({ video, localStorageVideo }) {
   const [recommendations, setRecommendations] = useState();
+  const [unauthorized, setUnauthorized] = useState(token.available())
   const [error, setError] = useState(null);
   const [comment, setComment] = useState(null);
 
@@ -17,29 +20,38 @@ export default function VideoPage({ video, localStorageVideo }) {
   video = video ? video : localStorageVideo;
   const fetchRecommendations = () => {
     const url = `http://localhost:9090/video?id=${video.id}`;
-    fetchData(url).then((result) => {
-      if (result.status === 200) {
-        setRecommendations([]);
-      } else if (result.status === 202) {
-        setError({
-          message: result.data,
-          type: "danger",
-        });
+    const header = { Authorization: `${token.getToken()}` };
+
+    fetchData(url, header).then((result) => {
+      if (result) {
+        if (result.status === 200) {
+          setRecommendations([]);
+        } else if (result.status === 202) {
+          setError({
+            message: result.data,
+            type: "danger",
+          });
+        }
       }
     });
   };
 
   const commentVideo = () => {
     const url = `http://localhost:9090/recommendation?videoId=${video.id}`;
+    const header = { Authorization: `${token.getToken()}` };
     const recommendation = {
       videoId: video.id,
       message: comment,
       postedAt: "",
     };
-    postData(url, recommendation).then((result) => {
-      if (result.status === 200) {
-        const newRecommendation = result.data;
-        setRecommendations([...recommendations, newRecommendation]);
+    postData(url, recommendation, header).then((result) => {
+      if (result) {
+        if (result.status === 200) {
+          const newRecommendation = result.data;
+          setRecommendations([...recommendations, newRecommendation]);
+        }
+      } else {
+        setUnauthorized(true)
       }
     });
   };
@@ -77,7 +89,7 @@ export default function VideoPage({ video, localStorageVideo }) {
               />
             </Form.Label>
             <Col sm="11" style={{ marginLeft: "0px" }}>
-              <Form.Control
+              {!unauthorized ? <Alert style={{width: "50%", margin: "auto"}} variant="info">Sign in to share your comment!</Alert> : <Fragment><Form.Control
                 onChange={(event) => setComment(event.target.value)}
                 type="text"
                 placeholder="Share your comment..."
@@ -86,19 +98,18 @@ export default function VideoPage({ video, localStorageVideo }) {
                   width: "94%",
                   marginBottom: "10px",
                 }}
-              />
-            </Col>
-            <Button
+              /><Button
               onClick={() => commentVideo()}
               className="float-left"
               style={{
                 maxWidth: "150px",
                 marginBottom: "70px",
-                marginLeft: "148px",
+                float: "left"
               }}
             >
               Comment
-            </Button>
+            </Button></Fragment>}
+            </Col>
           </Form.Group>
         </div>
         {recommendations &&

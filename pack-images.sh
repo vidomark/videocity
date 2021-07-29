@@ -4,7 +4,7 @@ echo "Performing a clean Maven build"
 ./mvnw clean package -DskipTests=true
 
 echo "Setting the default builder for pack"
-pack set-default-builder cloudfoundry/cnb:bionic
+pack config default-builder cnbs/sample-builder:bionic
 
 echo "Packing VIDEO-SERVICE"
 cd video-service

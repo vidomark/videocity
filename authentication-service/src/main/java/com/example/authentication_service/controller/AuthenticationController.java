@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -34,13 +35,16 @@ public class AuthenticationController {
             String url = "http://USER-SERVICE/login";
             String username = restTemplate.postForObject(url, loginRequest, String.class);
             String jwt = jwtUtil.generateToken(username);
+            Map<String, String> response = new HashMap();
+            response.put("username", username);
+            response.put("jwt", jwt);
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set(JWT_AUTHORIZATION_HEADER, jwt);
 
             return ResponseEntity.ok()
                     .headers(responseHeaders)
-                    .body(username);
+                    .body(response);
         } catch (Exception exception) {
             throw new RuntimeException("Invalid username or password");
         }

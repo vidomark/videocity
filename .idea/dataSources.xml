@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/videocity_video_service</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="videocity_user_service@localhost" uuid="12eab466-1434-4102-a372-be9ed6dcb159">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/videocity_user_service</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

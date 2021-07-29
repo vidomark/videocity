@@ -3,6 +3,7 @@ import { Alert } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { fetchData } from "../util/api";
 import Video from "./Video";
+import token from "../util/token";
 
 export default function Videos({ selectVideo }) {
   const [videos, setVideos] = useState(null);
@@ -10,6 +11,7 @@ export default function Videos({ selectVideo }) {
 
   useEffect(() => {
     const videoUrl = "http://localhost:9090/video";
+    //const header = { Authorization: `${token.getToken()}` };
     fetchData(videoUrl)
       .then((result) => {
         if (result) {
@@ -22,7 +24,7 @@ export default function Videos({ selectVideo }) {
   }, []);
 
   if (isLoading) {
-    return <Alert variant="info">Loading videos...</Alert>;
+    return <Alert style={{margin: "20px"}} variant="info">Loading videos...</Alert>;
   } else {
     return (
       videos && (

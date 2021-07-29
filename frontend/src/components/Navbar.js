@@ -1,7 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
+import token from "../util/token";
+import { toast } from "react-toastify";
 
-export default function Navbar() {
+function Navbar(props) {
+  toast.configure();
+  const notify = () =>
+    toast.success("You have been successfully logged out!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
+
+  const loggedIn = token.available();
+  const logout = () => {
+    token.logout(() => props.history.push("/"))
+    notify()
+  }
+
+  useEffect(() => {
+
+  }, [loggedIn])
+
   return (
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container px-5">
@@ -27,19 +47,14 @@ export default function Navbar() {
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" href="about.html">
-                About
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/login">
+              {loggedIn ?  <Link class="nav-link" to="/" onClick={() => logout()}>Logout</Link> : <Link class="nav-link" to="/login">
                 Login
-              </Link>
+              </Link>}
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/registration">
+              {!loggedIn && <Link class="nav-link" to="/registration">
                 Registration
-              </Link>
+              </Link>}
             </li>
           </ul>
         </div>
@@ -47,3 +62,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+export default withRouter(Navbar)
