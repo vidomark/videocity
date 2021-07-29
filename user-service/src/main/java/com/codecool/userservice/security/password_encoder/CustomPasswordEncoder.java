@@ -1,4 +1,4 @@
-package com.codecool.user_service.security.password_encoder;
+package com.codecool.userservice.security.password_encoder;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

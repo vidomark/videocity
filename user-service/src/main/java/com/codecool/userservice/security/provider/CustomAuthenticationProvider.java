@@ -1,4 +1,4 @@
-package com.codecool.user_service.security.provider;
+package com.codecool.userservice.security.provider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

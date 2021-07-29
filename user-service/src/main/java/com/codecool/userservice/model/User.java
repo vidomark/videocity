@@ -1,4 +1,4 @@
-package com.codecool.user_service.model;
+package com.codecool.userservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.codecool.user_service;
+package com.codecool.userservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

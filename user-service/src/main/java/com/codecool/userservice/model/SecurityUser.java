@@ -1,4 +1,4 @@
-package com.codecool.user_service.model;
+package com.codecool.userservice.model;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
