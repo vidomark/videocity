@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import { ReactComponent as Bin } from "../assets/images/trash.svg";
 import { ReactComponent as Edit } from "../assets/images/edit.svg";
 import { deleteData, putData } from "../util/api";
-import { Alert, Col, Form, Row, Button } from "react-bootstrap";
+import { Col, Form, Row, Button } from "react-bootstrap";
 import profilePicture from "../assets/images/profile-picture.png";
 
 export default function Recommendation({ recommendation, setRecommendations }) {
