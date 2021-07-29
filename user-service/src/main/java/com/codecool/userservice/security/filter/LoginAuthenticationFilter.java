@@ -42,8 +42,10 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        String username = authResult.getName();
-        response.addHeader("username", username);
+        ObjectMapper mapper = new ObjectMapper();
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().print(mapper.writeValueAsString(authResult.getName()));
+        response.getWriter().flush();
     }
 
     @Override

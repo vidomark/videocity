@@ -35,7 +35,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date())
-                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfiguration.getExpirationDays())))
+                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfiguration.getExpirationDate())))
                 .signWith(SignatureAlgorithm.HS256, jwtConfiguration.getSecretKey())
                 .compact();
     }
