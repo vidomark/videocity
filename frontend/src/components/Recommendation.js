@@ -5,15 +5,18 @@ import { ReactComponent as Edit } from "../assets/images/edit.svg";
 import { deleteData, putData } from "../util/api";
 import { Col, Form, Row, Button } from "react-bootstrap";
 import profilePicture from "../assets/images/profile-picture.png";
+import token from "../util/token";
 
 export default function Recommendation({ recommendation, setRecommendations }) {
   const [edit, setEdit] = useState(false);
   const [message, setMessage] = useState(null);
+  const [authenticated, setAuthenticated] = useState(token.available())
 
   const deleteComment = () => {
     const url = `http://localhost:9090/recommendation?id=${recommendation.id}`;
+    const header = { Authorization: `${token.getToken()}` };
     const message = recommendation.message;
-    deleteData(url).then((result) => {
+    deleteData(url, header).then((result) => {
       if (result.status === 200) {
         setRecommendations((previous) =>
           previous.filter(
@@ -25,19 +28,23 @@ export default function Recommendation({ recommendation, setRecommendations }) {
   };
 
   const editComment = () => {
-    const url = `http://localhost:9090/recommendation?id=${recommendation.id}`;
-    putData(url, message).then((result) => {
-      if (result.status === 200) {
-        const newComment = result.data;
-        setRecommendations((previous) =>
-          previous.map((recommendation) => {
-            if (recommendation.id === newComment.id) {
-              return (recommendation = newComment);
-            }
-            return recommendation;
-          })
-        );
-        setEdit(false);
+    const url = `http://localhost:9090/recommendation?id=${recommendation.id}&message=${message}`;
+    const header = { Authorization: `${token.getToken()}` };
+    putData(url, null, header).then((result) => {
+      if (result) {
+        if (result.status === 200) {
+          const newComment = result.data;
+          console.log(newComment);
+          setRecommendations((previous) =>
+            previous.map((recommendation) => {
+              if (recommendation.id === newComment.id) {
+                return (recommendation = newComment);
+              }
+              return recommendation;
+            })
+          );
+          setEdit(false);
+        }
       }
     });
   };
@@ -75,8 +82,8 @@ export default function Recommendation({ recommendation, setRecommendations }) {
               )}
             </div>
             <div className="delete-icon-container">
-              <Bin className="delete-icon" onClick={() => deleteComment()} />
-              <Edit className="edit-icon" onClick={() => setEdit(true)} />
+              {authenticated && <Bin className="delete-icon" onClick={() => deleteComment()} />}
+              {authenticated && <Edit className="edit-icon" onClick={() => setEdit(true)} />}
             </div>
           </div>
 

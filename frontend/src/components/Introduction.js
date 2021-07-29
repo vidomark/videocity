@@ -8,19 +8,7 @@ export default function Introduction() {
           <div class="col-lg-10 col-xl-7">
             <div class="text-center">
               <div class="fs-4 mb-4 fst-italic">
-                This is my first microservice application using Spring Boot.
-              </div>
-              <div class="d-flex align-items-center justify-content-center">
-                <img
-                  class="rounded-circle me-3"
-                  src="https://dummyimage.com/40x40/ced4da/6c757d"
-                  alt="..."
-                />
-                <div class="fw-bold">
-                  Vidó Márk
-                  <span class="fw-bold text-primary mx-1">/</span>
-                  Codecooler
-                </div>
+                Microservice application using Spring Boot.
               </div>
             </div>
           </div>

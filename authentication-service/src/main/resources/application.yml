@@ -1,0 +1,17 @@
+server:
+  port: 8073
+
+spring:
+  application:
+    name: AUTHENTICATION-SERVICE
+    jwt:
+      secretKey: D5UmXKGUpmTmNTYsdkgKW1GVrHoHEHNC
+      tokenPrefix: Bearer
+      expirationDate: 14
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

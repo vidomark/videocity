@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import {postData} from "../util/api"
 import {
   MDBContainer,
   MDBRow,
@@ -12,8 +13,42 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 
 export default function Registration() {
+  const [registrationState, setRegistrationState] = useState(null)
+  const [message, setMessage] = useState(null)
+  const [formData, setFormData] = useState({
+    email: null,
+    username: null,
+    password: null,
+    confirmPassword: null,
+  });
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const sendRegistration = () => {
+    const url = "http://localhost:9090/auth/registration";
+    console.log(formData);
+    postData(url, formData)
+      .then((result) => {
+        if (result) {
+          setRegistrationState("success");
+          setMessage("Successful registration!");
+        } else {
+          console.log("ELSE: " + result);
+          setRegistrationState("danger");
+          setMessage("Please check your ceredentials!");
+        }
+      })
+      .catch((error) => {
+        setRegistrationState("danger");
+        setMessage("Please check your ceredentials!");
+      });
+  };
+
   return (
     <MDBContainer className="mt-5 mb-5 form-container">
       <MDBRow>
@@ -25,10 +60,11 @@ export default function Registration() {
                   <MDBIcon icon="lock" /> Registration:
                 </h3>
               </MDBCardHeader>
-              <form>
+              {registrationState && <Alert style={{marginTop: "20px", marginBottom: "20px"}} variant={registrationState}>{message}</Alert>}
                 <div className="grey-text">
                   <MDBInput
                     label="Email"
+                    name="email"
                     icon="envelope"
                     group
                     type="email"
@@ -36,30 +72,37 @@ export default function Registration() {
                     error="wrong"
                     success="right"
                     className="input"
+                    onChange={(event) => handleChange(event)}
                   />
                   <MDBInput
                     label="Username"
+                    name="username"
                     icon="lock"
                     group
                     type="text"
                     validate
                     className="input"
+                    onChange={(event) => handleChange(event)}
                   />
                   <MDBInput
                     label="Password"
+                    name="password"
                     icon="lock"
                     group
                     type="password"
                     validate
                     className="input"
+                    onChange={(event) => handleChange(event)}
                   />
                   <MDBInput
                     label="Confirm password"
+                    name="confirmPassword"
                     icon="lock"
                     group
                     type="password"
                     validate
                     className="input"
+                    onChange={(event) => handleChange(event)}
                   />
                 </div>
 
@@ -68,11 +111,11 @@ export default function Registration() {
                     color="blue"
                     className="mb-3 form-button"
                     type="submit"
+                    onClick={() => sendRegistration()}
                   >
                     Sign Up
                   </MDBBtn>
                 </div>
-              </form>
               <MDBModalFooter>
                 <div className="font-weight-light">
                   <p>

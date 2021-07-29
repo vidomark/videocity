@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: API-GATEWAY
+    jwt:
+      secretKey: D5UmXKGUpmTmNTYsdkgKW1GVrHoHEHNC
+      tokenPrefix: Bearer
+      expirationDate: 14
   cloud:
     gateway:
       globalcors:
@@ -16,14 +20,10 @@ spring:
               - PUT
               - DELETE
       routes:
-        - id: VIDEO-SERVICE
-          uri: lb://VIDEO-SERVICE
+        - id: AUTHENTICATION-SERVICE
+          uri: lb://AUTHENTICATION-SERVICE
           predicates:
-            - Path=/video/**
-        - id: RECOMMENDATION-SERVICE
-          uri: lb://RECOMMENDATION-SERVICE
-          predicates:
-            - Path=/recommendation/**
+            - Path=/auth/**
 
 eureka:
   client:

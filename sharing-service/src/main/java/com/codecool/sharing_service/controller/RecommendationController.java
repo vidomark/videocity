@@ -3,8 +3,7 @@ package com.codecool.sharing_service.controller;
 import com.codecool.sharing_service.model.Recommendation;
 import com.codecool.sharing_service.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -35,8 +34,8 @@ public class RecommendationController {
         recommendationService.deleteRecommendation(id);
     }
 
-    @PutMapping(params = "id")
-    public Recommendation editRecommendation(@RequestParam("id") String id, @RequestBody String message) {
+    @PutMapping
+    public Recommendation editRecommendation(@RequestParam("id") String id, @RequestParam("message") String message) {
         return recommendationService.editRecommendation(id, message);
     }
 }

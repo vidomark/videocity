@@ -1,6 +1,7 @@
 import "./App.css";
 import "./assets/css/style.css";
 import "./assets/css/form.css";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
