@@ -2,30 +2,45 @@ package com.example.authentication_service.controller;
 
 import com.example.authentication_service.model.LoginRequest;
 import com.example.authentication_service.model.RegistrationRequest;
+import com.example.authentication_service.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
 
     private final RestTemplate restTemplate;
+    private final JwtUtil jwtUtil;
+    private final String JWT_AUTHORIZATION_HEADER = "Bearer ";
 
     @Autowired
-    public AuthenticationController(RestTemplate restTemplate) {
+    public AuthenticationController(RestTemplate restTemplate, JwtUtil jwtUtil) {
         this.restTemplate = restTemplate;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest) {
-        String url = "http://USER-SERVICE/login";
+    public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest) {
         try {
-            String response = restTemplate.postForObject(url, loginRequest, String.class);
-            return response;
+            String url = "http://USER-SERVICE/login";
+            String username = restTemplate.postForObject(url, loginRequest, String.class);
+            String jwt = jwtUtil.generateToken(username);
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set(JWT_AUTHORIZATION_HEADER, jwt);
+
+            return ResponseEntity.ok()
+                    .headers(responseHeaders)
+                    .body(username);
         } catch (Exception exception) {
             throw new RuntimeException("Invalid username or password");
         }

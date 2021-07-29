@@ -5,6 +5,7 @@ import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -12,10 +13,12 @@ import java.util.Date;
 public class JwtUtil {
 
     private final JwtConfiguration jwtConfiguration;
+    private final SecretKey secretKey;
 
     @Autowired
-    public JwtUtil(JwtConfiguration jwtConfiguration) {
+    public JwtUtil(JwtConfiguration jwtConfiguration, SecretKey secretKey) {
         this.jwtConfiguration = jwtConfiguration;
+        this.secretKey = secretKey;
     }
 
     public Claims getClaims(final String token) {
@@ -29,14 +32,11 @@ public class JwtUtil {
         }
     }
 
-    public String generateToken(String id) {
-        Claims claims = Jwts.claims().setSubject(id);
-
+    public String generateToken(String username) {
         return Jwts.builder()
-                .setClaims(claims)
+                .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfiguration.getExpirationDate())))
-                .signWith(SignatureAlgorithm.HS256, jwtConfiguration.getSecretKey())
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
